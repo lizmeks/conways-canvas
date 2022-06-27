@@ -1,0 +1,20 @@
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: lightgray;
+}
+
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 160px;
+  height: 160px;
+  background-color: darkgray;
+}
+
+.grid-cell {
+  width: 16px;
+  height: 16px;
+}
