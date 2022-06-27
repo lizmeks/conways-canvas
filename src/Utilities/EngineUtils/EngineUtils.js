@@ -1,4 +1,4 @@
-const boardEngine = board => {
+const generateNextBoard = board => {
   let newBoard = [];
   for (let y = 0; y < board.length; y++) {
     newBoard.push([]);
@@ -41,3 +41,19 @@ const boardEngine = board => {
   };
   return newBoard
 };
+
+const generateBlankBoard = (width, height) => {
+  let board = [];
+  for (let y = 0; y < height; y++) {
+    board.push([]);
+    for (let x = 0; x < width; x++) {
+      board[y].push({
+        life: false,
+        color: "FFFFFF"
+      })
+    };
+  };
+  return board
+};
+
+export { generateBlankBoard, generateNextBoard }
