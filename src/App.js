@@ -4,7 +4,7 @@ import { generateBlankBoard, generateNextBoard } from './Utilities/EngineUtils/E
 
 class App extends Component {
   state = { 
-    board: generateBlankBoard(10, 10)
+    canvas: generateBlankBoard(10, 10)
   }
 
   renderGridCell = (cell, x, y) => {
@@ -20,7 +20,7 @@ class App extends Component {
   };
 
   renderGrid = () => {
-    let result = this.state.board.map((row, y) => {
+    let result = this.state.canvas.map((row, y) => {
       return row.map((cell, x) => {
         return this.renderGridCell(cell, x, y)
       })
@@ -33,14 +33,14 @@ class App extends Component {
   };
 
   paintHandler = (x, y) => {
-    if (this.state.board[y][x].life === false) {
-      this.state.board[y][x] = {
+    if (this.state.canvas[y][x].life === false) {
+      this.state.canvas[y][x] = {
         life: true,
         color: "000000"
       }
     }
-    else if (this.state.board[y][x].life === true) {
-      this.state.board[y][x] = {
+    else if (this.state.canvas[y][x].life === true) {
+      this.state.canvas[y][x] = {
         life: false,
         color: "FFFFFF"
       }
@@ -48,11 +48,18 @@ class App extends Component {
     this.forceUpdate();
   };
 
+  stepHandler = () => {
+    let newCanvas = generateNextBoard(this.state.canvas)
+    this.setState({
+      canvas: newCanvas
+    })
+  }
+
   render() { 
     return (
       <div className='page'>
         {this.renderGrid()}
-        <button>Next Step</button>
+        <button onClick={this.stepHandler}>Next Step</button>
       </div>
     );
   }
