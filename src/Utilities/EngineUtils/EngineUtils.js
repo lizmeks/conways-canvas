@@ -29,14 +29,29 @@ const generateNextBoard = board => {
         count += 1
       };
       if (count < 2 || count > 3) {
-        newBoard[y].push({life: false})
+        newBoard[y].push({
+          life: false,
+          color: "FFFFFF"
+        })
       }
       else if (count === 3 && board[y][x].life === false) {
-        newBoard[y].push({life: true})
+        newBoard[y].push({
+          life: true,
+          color: "000000"
+        })
       }
-      else if (2 <= count <= 3 && board[y][x].life === true) {
-        newBoard[y].push({life: true})
-      };
+      else if (count >= 2 && count <= 3 && board[y][x].life === true) {
+        newBoard[y].push({
+          life: true,
+          color: "000000"
+        })
+      }
+      else {
+        newBoard[y].push({
+          life: false,
+          color: "FFFFFF"
+        })
+      }
     };
   };
   return newBoard

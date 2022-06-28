@@ -53,6 +53,7 @@ class App extends Component {
     this.setState({
       canvas: newCanvas
     })
+    this.forceUpdate();
   }
 
   render() { 
