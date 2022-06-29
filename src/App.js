@@ -6,7 +6,8 @@ import { generateBlankBoard, generateNextBoard } from './Utilities/EngineUtils/E
 class App extends Component {
   state = { 
     canvas: generateBlankBoard(100, 100),
-    playing: false
+    playing: false,
+    selectedColor: "255, 255, 255"
   }
 
   playInterval = undefined;
@@ -35,7 +36,7 @@ class App extends Component {
       <div
         className='grid-cell'
         key={`${x}, ${y}`}
-        style={{backgroundColor: '#' + cell.color}}
+        style={{backgroundColor: `rgb(${cell.color.red}, ${cell.color.green}, ${cell.color.blue})`}}
         onClick={() => this.paintHandler(x, y)}
       >
       </div>
@@ -60,7 +61,11 @@ class App extends Component {
       let newCanvas = cloneDeep(this.state.canvas);
       newCanvas[y][x] = {
         life: true,
-        color: "000000"
+        color: {
+          red: 0,
+          green: 0,
+          blue: 0
+        }
       }
       this.setState({
         canvas: newCanvas
@@ -70,7 +75,11 @@ class App extends Component {
       let newCanvas = cloneDeep(this.state.canvas);
       newCanvas[y][x] = {
         life: false,
-        color: "FFFFFF"
+        color: {
+          red: 255,
+          green: 255,
+          blue: 255
+        }
       }
       this.setState({
         canvas: newCanvas

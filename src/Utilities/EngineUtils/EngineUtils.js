@@ -31,25 +31,41 @@ const generateNextBoard = board => {
       if (count < 2 || count > 3) {
         newBoard[y].push({
           life: false,
-          color: "FFFFFF"
+          color: {
+            red: 255,
+            green: 255,
+            blue: 255
+          }
         })
       }
       else if (count === 3 && board[y][x].life === false) {
         newBoard[y].push({
           life: true,
-          color: "000000"
+          color: {
+            red: 0,
+            green: 0,
+            blue: 0
+          }
         })
       }
       else if (count >= 2 && count <= 3 && board[y][x].life === true) {
         newBoard[y].push({
           life: true,
-          color: "000000"
+          color: {
+            red: 0,
+            green: 0,
+            blue: 0
+          }
         })
       }
       else {
         newBoard[y].push({
           life: false,
-          color: "FFFFFF"
+          color: {
+            red: 255,
+            green: 255,
+            blue: 255
+          }
         })
       }
     };
@@ -64,7 +80,11 @@ const generateBlankBoard = (width, height) => {
     for (let x = 0; x < width; x++) {
       board[y].push({
         life: false,
-        color: "FFFFFF"
+        color: {
+          red: 255,
+          green: 255,
+          blue: 255
+        }
       })
     };
   };
