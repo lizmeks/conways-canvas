@@ -1,11 +1,34 @@
 import { Component } from 'react';
+import { cloneDeep } from 'lodash';
 import './styles/gridStyle.scss'
 import { generateBlankBoard, generateNextBoard } from './Utilities/EngineUtils/EngineUtils';
 
 class App extends Component {
   state = { 
-    canvas: generateBlankBoard(10, 10)
+    canvas: generateBlankBoard(100, 100),
+    playing: false
   }
+
+  playInterval = undefined;
+
+  playHandler = () => {
+    if (!this.state.playing) {
+      this.setState({
+        playing: true
+      })
+      this.playInterval = setInterval(this.stepHandler, 250);
+    }
+    if (this.state.playing) {
+      this.pauseBoard();
+    }
+  };
+
+  pauseBoard = () => {
+    this.setState({
+      playing: false
+    })
+    clearInterval(this.playInterval);
+  };
 
   renderGridCell = (cell, x, y) => {
     return (
@@ -34,18 +57,25 @@ class App extends Component {
 
   paintHandler = (x, y) => {
     if (this.state.canvas[y][x].life === false) {
-      this.state.canvas[y][x] = {
+      let newCanvas = cloneDeep(this.state.canvas);
+      newCanvas[y][x] = {
         life: true,
         color: "000000"
       }
+      this.setState({
+        canvas: newCanvas
+      })
     }
     else if (this.state.canvas[y][x].life === true) {
-      this.state.canvas[y][x] = {
+      let newCanvas = cloneDeep(this.state.canvas);
+      newCanvas[y][x] = {
         life: false,
         color: "FFFFFF"
       }
-    };
-    this.forceUpdate();
+      this.setState({
+        canvas: newCanvas
+      })
+    }
   };
 
   stepHandler = () => {
@@ -53,7 +83,13 @@ class App extends Component {
     this.setState({
       canvas: newCanvas
     })
-    this.forceUpdate();
+  }
+
+  clearCanvasHandler = () => {
+    this.setState({
+      canvas: generateBlankBoard(100, 100)
+    })
+    this.pauseBoard();
   }
 
   render() { 
@@ -61,6 +97,8 @@ class App extends Component {
       <div className='page'>
         {this.renderGrid()}
         <button onClick={this.stepHandler}>Next Step</button>
+        <button onClick={this.clearCanvasHandler}>Clear Canvas</button>
+        <button onClick={this.playHandler}>{this.state.playing ? "Pause" : "Play"}</button>
       </div>
     );
   }
