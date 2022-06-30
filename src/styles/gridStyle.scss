@@ -13,13 +13,14 @@
 .grid-container {
   display: flex;
   flex-wrap: wrap;
-  width: 1600px;
-  height: 1600px;
+  width: 1200px;
+  height: 1200px;
   background-color: darkgray;
 }
 
 .grid-cell {
-  width: 16px;
-  height: 16px;
-  border: 1px solid rgba(128, 128, 128, .5);
+  width: 12px;
+  height: 12px;
+  border-right: 1px solid rgba(128, 128, 128, .5);
+  border-bottom: 1px solid rgba(128, 128, 128, .5);
 }
