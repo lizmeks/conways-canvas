@@ -51,11 +51,7 @@ const generateNextBoard = board => {
       else if (count >= 2 && count <= 3 && board[y][x].life === true) {
         newBoard[y].push({
           life: true,
-          color: {
-            red: 0,
-            green: 0,
-            blue: 0
-          }
+          color: board[y][x].color
         })
       }
       else {

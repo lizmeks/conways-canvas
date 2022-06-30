@@ -7,7 +7,11 @@ class App extends Component {
   state = { 
     canvas: generateBlankBoard(100, 100),
     playing: false,
-    selectedColor: "255, 255, 255"
+    selectedColor: {
+      red: 0,
+      green: 0,
+      blue: 0
+    }
   }
 
   playInterval = undefined;
@@ -61,11 +65,7 @@ class App extends Component {
       let newCanvas = cloneDeep(this.state.canvas);
       newCanvas[y][x] = {
         life: true,
-        color: {
-          red: 0,
-          green: 0,
-          blue: 0
-        }
+        color: this.state.selectedColor
       }
       this.setState({
         canvas: newCanvas
@@ -101,9 +101,62 @@ class App extends Component {
     this.pauseBoard();
   }
 
+  colorSelectHandler = (e) => {
+    let selectedColor = JSON.parse(e.target.value)
+    this.setState({
+      selectedColor: selectedColor.color
+    })
+  }
+
   render() { 
     return (
       <div className='page'>
+        <select onChange={this.colorSelectHandler}>
+          <option
+            value={JSON.stringify({
+              color: {
+              red: 255,
+              green: 255,
+              blue: 255
+              }
+            })}
+          >
+            Black
+          </option>
+          <option
+            value={JSON.stringify({
+              color: {
+              red: 255,
+              green: 0,
+              blue: 0
+              }
+            })}
+          >
+            Red
+          </option>
+          <option
+            value={JSON.stringify({
+              color: {
+              red: 0,
+              green: 255,
+              blue: 0
+              }
+            })}
+          >
+            Green
+          </option>
+          <option
+            value={JSON.stringify({
+              color: {
+              red: 0,
+              green: 0,
+              blue: 255
+              }
+            })}
+          >
+            Blue
+          </option>
+        </select>
         {this.renderGrid()}
         <button onClick={this.stepHandler}>Next Step</button>
         <button onClick={this.clearCanvasHandler}>Clear Canvas</button>
