@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import { cloneDeep } from 'lodash';
 import './styles/gridStyle.scss'
 import { generateBlankBoard, generateNextBoard } from './Utilities/EngineUtils/EngineUtils';
+import brushes from './Utilities/Brushes/brushes';
 
 class App extends Component {
   state = { 
@@ -11,7 +11,9 @@ class App extends Component {
       red: 0,
       green: 0,
       blue: 0
-    }
+    },
+    paintMode: true,
+    brush: brushes.dot
   }
 
   playInterval = undefined;
@@ -54,37 +56,30 @@ class App extends Component {
       })
     });
     return (
-      <div className='grid-container'>
+      <div className='grid-container' >
         { result }
       </div>
     )
   };
 
-  paintHandler = (x, y) => {
-    if (this.state.canvas[y][x].life === false) {
-      let newCanvas = cloneDeep(this.state.canvas);
-      newCanvas[y][x] = {
-        life: true,
-        color: this.state.selectedColor
-      }
-      this.setState({
-        canvas: newCanvas
-      })
-    }
-    else if (this.state.canvas[y][x].life === true) {
-      let newCanvas = cloneDeep(this.state.canvas);
-      newCanvas[y][x] = {
-        life: false,
-        color: {
-          red: 255,
-          green: 255,
-          blue: 255
+  paintHandler = (clickX, clickY) => {
+    let { canvas, brush, selectedColor, paintMode } = this.state;
+
+    brush.forEach((brushRow, brushY) => {
+      brushRow.forEach((brushCell, brushX) => {
+        if(brushCell === 1) { 
+          let targetY = clickY + brushY - (Math.floor(brush.length / 2));
+          let targetX = clickX + brushX - (Math.floor(brush[0].length / 2));
+          if(canvas[targetY] && canvas[targetY][targetX ]) { 
+            canvas[targetY][targetX ] = {
+              color: paintMode ? selectedColor : {red: 255, green: 255, blue: 255},
+              life: paintMode ? true : false
+            }
+          } 
         }
-      }
-      this.setState({
-        canvas: newCanvas
       })
-    }
+    })
+    this.forceUpdate()
   };
 
   stepHandler = () => {
