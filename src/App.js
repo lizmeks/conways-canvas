@@ -115,9 +115,9 @@ class App extends Component {
           <option
             value={JSON.stringify({
               color: {
-              red: 255,
-              green: 255,
-              blue: 255
+              red: 0,
+              green: 0,
+              blue: 0
               }
             })}
           >
