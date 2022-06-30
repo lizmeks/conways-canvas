@@ -13,7 +13,7 @@ class App extends Component {
       blue: 0
     },
     paintMode: true,
-    brush: brushes.dot
+    brush: brushes.glider
   }
 
   playInterval = undefined;
@@ -63,6 +63,7 @@ class App extends Component {
   };
 
   paintHandler = (clickX, clickY) => {
+    console.log(clickX, clickY);
     let { canvas, brush, selectedColor, paintMode } = this.state;
 
     brush.forEach((brushRow, brushY) => {
@@ -71,7 +72,7 @@ class App extends Component {
           let targetY = clickY + brushY - (Math.floor(brush.length / 2));
           let targetX = clickX + brushX - (Math.floor(brush[0].length / 2));
           if(canvas[targetY] && canvas[targetY][targetX ]) { 
-            canvas[targetY][targetX ] = {
+            canvas[targetY][targetX] = {
               color: paintMode ? selectedColor : {red: 255, green: 255, blue: 255},
               life: paintMode ? true : false
             }
