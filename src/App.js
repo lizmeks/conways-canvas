@@ -21,7 +21,7 @@ class App extends Component {
       this.setState({
         playing: true
       })
-      this.playInterval = setInterval(this.stepHandler, 250);
+      this.playInterval = setInterval(this.stepHandler, 100);
     }
     if (this.state.playing) {
       this.pauseBoard();
