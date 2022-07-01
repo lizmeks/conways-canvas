@@ -12,8 +12,8 @@ class App extends Component {
       green: 0,
       blue: 0
     },
-    paintMode: true,
-    brush: brushes.glider
+    erase: false,
+    brush: brushes.dot
   }
 
   playInterval = undefined;
@@ -63,8 +63,7 @@ class App extends Component {
   };
 
   paintHandler = (clickX, clickY) => {
-    console.log(clickX, clickY);
-    let { canvas, brush, selectedColor, paintMode } = this.state;
+    let { canvas, brush, selectedColor, erase } = this.state;
 
     brush.forEach((brushRow, brushY) => {
       brushRow.forEach((brushCell, brushX) => {
@@ -73,14 +72,27 @@ class App extends Component {
           let targetX = clickX + brushX - (Math.floor(brush[0].length / 2));
           if(canvas[targetY] && canvas[targetY][targetX ]) { 
             canvas[targetY][targetX] = {
-              color: paintMode ? selectedColor : {red: 255, green: 255, blue: 255},
-              life: paintMode ? true : false
+              color: erase ? {red: 255, green: 255, blue: 255} : selectedColor,
+              life: erase ? false : true
             }
           } 
         }
       })
     })
-    this.forceUpdate()
+    this.forceUpdate();
+  };
+
+  eraseHandler = () => {
+    if (this.state.erase) {
+      this.setState({
+        erase: false
+      })
+    }
+    else {
+      this.setState({
+        erase: true
+      })
+    }
   };
 
   stepHandler = () => {
@@ -153,6 +165,7 @@ class App extends Component {
             Blue
           </option>
         </select>
+        <button onClick={this.eraseHandler}>{this.state.erase ? "Erase: On" : "Erase: Off"}</button>
         {this.renderGrid()}
         <button onClick={this.stepHandler}>Next Step</button>
         <button onClick={this.clearCanvasHandler}>Clear Canvas</button>
