@@ -2,59 +2,65 @@ const brushes = [
 
   {
     name: "dot",
-    brush: [
+    value: [
       [1]
     ],
+    type: "paint tool",
     id: 1
   },
 
   {
     name: "diamond",
-    brush: [
+    value: [
       [0,0,1,0,0],
       [0,1,1,1,0],
       [1,1,1,1,1],
       [0,1,1,1,0],
       [0,0,1,0,0],
     ],
+    type: "pattern",
     id: 2
   },
   
   {
     name: "block",
-    brush: [
-      [0,1,1],
-      [0,1,1]
+    value: [
+      [1,1],
+      [1,1]
     ],
+    type: "still life",
     id: 3
   },
 
   {
     name: "blinker",
-    brush: [
+    value: [
       [0,0,0],
       [1,1,1],
       [0,0,0]
     ],
+    type: "oscillator",
     id: 4
   },
 
   {
     name: "toad",
-    brush: [
-      [0,1,1,1,0],
-      [1,1,1,0,0]
+    value: [
+      [0,1,1,1],
+      [1,1,1,0]
     ],
+    type: "oscillator",
     id: 5
   },
 
   {
     name: "glider",
-    brush: [
+    value: [
       [0,0,1],
       [1,0,1],
       [0,1,1]
     ],
+    type: "spaceship",
     id: 6
   },
 

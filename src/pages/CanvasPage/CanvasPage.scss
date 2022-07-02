@@ -1,4 +1,5 @@
 .menu {
+  margin-left: 1rem;
   
   &__button-container {
     display: flex;
@@ -11,7 +12,7 @@
     height: 4rem;
     width: 4rem;
     border-radius: 8px;
-    margin-left: 1rem;
+    margin-right: 1rem;
     cursor: pointer;
 
     &:active {
@@ -21,12 +22,13 @@
 
   &__button-image {
     height: 3rem;
+    width: 3rem;
   }
 }
 
 .palette {
   display: flex;
-  margin: 1rem;
+  margin: 1rem 1rem 1rem 0;
 
   &__button {
     display: flex;
@@ -37,6 +39,11 @@
     border-radius: 8px;
     border: none;
     margin-right: .25rem;
+    cursor: pointer;
+
+    &:focus {
+      background-color: rgba($color: grey, $alpha: .5);
+    }
 
     &--color {
       height: 1.5rem;
@@ -45,3 +52,49 @@
     }
   }
 }
+
+.tools {
+  margin: 1rem 1rem 1rem 0;
+
+  &__text {
+    font-size: 1.25rem;
+    margin-bottom: .25rem;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    height: 8rem;
+    width: 20rem;
+    background-color: grey;
+    box-shadow: inset 0px 0px 10px 4px #D3D3D3;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    overflow: auto;
+  }
+
+  &__list-item {
+    height: fit-content;
+    width: fit-content;
+    padding: .5rem;
+    margin: 0 .5rem .5rem 0;
+  }
+
+  &__image {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: darkgray;
+    border: 1px solid black;
+  }
+
+  &__image-cell {
+    width: 12px;
+    height: 12px;
+    border-right: 1px solid rgba(128, 128, 128, .5);
+    border-bottom: 1px solid rgba(128, 128, 128, .5);
+  }
+}
+
+
+

@@ -20,7 +20,7 @@ class CanvasPage extends Component {
       blue: 0
     },
     erase: false,
-    brush: brushes[0].brush
+    brush: brushes[0].value
   }
 
   playInterval = undefined;
@@ -57,16 +57,56 @@ class CanvasPage extends Component {
   };
 
   renderGrid = () => {
-    let result = this.state.canvas.map((row, y) => {
+    let grid = this.state.canvas.map((row, y) => {
       return row.map((cell, x) => {
         return this.renderGridCell(cell, x, y)
       })
     });
     return (
       <div className='grid-container' >
-        { result }
+        { grid }
       </div>
     )
+  };
+
+  renderBrushImage = (brushValue) => {
+    let image = brushValue.map((row, y) => {
+      return row.map((cell, x) => {
+        return this.renderBrushImageCell(cell, x, y)
+      })
+    });
+    return (
+      <div className='tools__image' style={{width: `${(brushValue[0].length * 0.75) + (2/16)}rem`}}>
+        { image }
+      </div>
+    )
+  }
+
+  renderBrushImageCell = (cell, x, y) => {
+    const { selectedColor } = this.state;
+    return (
+      <div
+        className='tools__image-cell'
+        key={`${x}, ${y}`}
+        style={cell ? {backgroundColor: `rgb(${selectedColor.red}, ${selectedColor.green}, ${selectedColor.blue})`} : {backgroundColor: `rgb(255,255,255)`}}
+      >
+      </div>
+    )
+  }
+
+  renderToolItems = (itemType) => {
+    return brushes.filter(brush => brush.type === itemType).map(brush => {
+      return (
+        <button
+          key={brush.id}
+          value={brush.name}
+          className="tools__list-item"
+          onClick={() => this.brushSelectHandler(brush.name)}
+        >
+          {this.renderBrushImage(brush.value)}
+        </button>
+      )
+    })
   };
 
   paintHandler = (clickX, clickY) => {
@@ -116,8 +156,8 @@ class CanvasPage extends Component {
     this.pauseBoard();
   };
 
-  colorSelectHandler = (buttonColor) => {
-    let selectedColor = colors.find(color => color.name === buttonColor);
+  colorSelectHandler = (colorName) => {
+    let selectedColor = colors.find(color => color.name === colorName);
     this.setState({
       selectedColor: selectedColor.value
     })
@@ -130,10 +170,10 @@ class CanvasPage extends Component {
     })
   };
 
-  brushSelectHandler = (e) => {
-    let selectedBrush = brushes.find(element => element.name === e.target.value);
+  brushSelectHandler = (brushName) => {
+    let selectedBrush = brushes.find(element => element.name === brushName);
     this.setState({
-      brush: selectedBrush.brush
+      brush: selectedBrush.value
     })
   };
 
@@ -156,40 +196,64 @@ class CanvasPage extends Component {
               <img className="menu__button-image" src={clearIcon} alt="clear canvas"/>
             </button>
           </div>
-        <div className='palette'>
-          {
-            colors.map(color => {
-              return (
-                <button
-                  className='palette__button'
-                  key={color.id}
-                  onClick={() => this.colorSelectHandler(color.name)}
-                >
-                  <div
-                    className='palette__button--color'
-                    style={{backgroundColor: `rgb(${color.value.red}, ${color.value.green}, ${color.value.blue})`}}
+          <div className='palette'>
+            {
+              colors.map(color => {
+                return (
+                  <button
+                    className='palette__button'
+                    key={color.id}
+                    onClick={() => this.colorSelectHandler(color.name)}
                   >
-                  </div>
-                </button>
-              )
-            })
-          }
-        </div>
-        <button onClick={this.eraseHandler}>{this.state.erase ? "Erase: On" : "Erase: Off"}</button>
-        <select onChange={this.brushSelectHandler}>
-          {
-            brushes.map(element => {
-              return (
-                <option
-                  key={element.id}
-                  value={element.name}
-                >
-                  {element.name}
-                </option>
-              )
-            })
-          }
-        </select>
+                    <div
+                      className='palette__button--color'
+                      style={{backgroundColor: `rgb(${color.value.red}, ${color.value.green}, ${color.value.blue})`}}
+                    >
+                    </div>
+                  </button>
+                )
+              })
+            }
+          </div>
+          <button onClick={this.eraseHandler}>{this.state.erase ? "Erase: On" : "Erase: Off"}</button>
+          <div className='tools'>
+            <div className='tools__container'>
+              <p className='tools__text'>Paint Tools</p>
+              <div className='tools__list'>
+                {this.renderToolItems("paint tool")}
+              </div>
+            </div>
+            <div className='tools__container'>
+              <p className='tools__text'>Patterns</p>
+              <div className='tools__list'>
+                {this.renderToolItems("pattern")}
+              </div>
+            </div>
+            <div className='tools__container'>
+              <p className='tools__text'>Still Lifes</p>
+              <div className='tools__list'>
+                {this.renderToolItems("still life")}
+              </div>
+            </div>
+            <div className='tools__container'>
+              <p className='tools__text'>Oscillators</p>
+              <div className='tools__list'>
+                {this.renderToolItems("oscillator")}
+              </div>
+            </div>
+            <div className='tools__container'>
+              <p className='tools__text'>Spaceships</p>
+              <div className='tools__list'>
+                {this.renderToolItems("spaceship")}
+              </div>
+            </div>
+            <div className='tools__container'>
+              <p className='tools__text'>Guns</p>
+              <div className='tools__list'>
+                {this.renderToolItems("gun")}
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     );
