@@ -13,7 +13,7 @@ class App extends Component {
       blue: 0
     },
     erase: false,
-    brush: brushes.dot
+    brush: brushes[0].brush
   }
 
   playInterval = undefined;
@@ -110,7 +110,7 @@ class App extends Component {
   };
 
   colorSelectHandler = (e) => {
-    let selectedColor = JSON.parse(e.target.value)
+    let selectedColor = JSON.parse(e.target.value);
     this.setState({
       selectedColor: selectedColor.color
     })
@@ -120,6 +120,13 @@ class App extends Component {
     this.pauseBoard();
     this.setState({
       canvas: generateNextBoard(generateRandomBoard(100, 100))
+    })
+  };
+
+  brushSelectHandler = (e) => {
+    let selectedBrush = brushes.find(element => element.name === e.target.value);
+    this.setState({
+      brush: selectedBrush.brush
     })
   };
 
@@ -173,6 +180,20 @@ class App extends Component {
           </option>
         </select>
         <button onClick={this.eraseHandler}>{this.state.erase ? "Erase: On" : "Erase: Off"}</button>
+        <select onChange={this.brushSelectHandler}>
+          {
+            brushes.map(element => {
+              return (
+                <option
+                  key={element.id}
+                  value={element.name}
+                >
+                  {element.name}
+                </option>
+              )
+            })
+          }
+        </select>
         {this.renderGrid()}
         <button onClick={this.stepHandler}>Next Step</button>
         <button onClick={this.clearCanvasHandler}>Clear Canvas</button>
