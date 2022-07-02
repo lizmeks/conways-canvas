@@ -1,8 +1,14 @@
 import { Component } from 'react';
-import '../../styles/gridStyle.scss'
+import '../../styles/gridStyle.scss';
+import './CanvasPage.scss';
 import { generateBlankBoard, generateNextBoard, generateRandomBoard } from '../../Utilities/EngineUtils/EngineUtils';
 import brushes from '../../Utilities/Brushes/brushes';
 import colors from '../../Utilities/Colors/colors';
+import nextIcon from '../../assets/icons/next-icon.svg';
+import playIcon from '../../assets/icons/play-icon.svg';
+import pauseIcon from '../../assets/icons/pause-icon.svg';
+import clearIcon from '../../assets/icons/clear-icon.svg';
+import randomIcon from '../../assets/icons/random-icon.svg';
 
 class CanvasPage extends Component {
   state = { 
@@ -133,8 +139,24 @@ class CanvasPage extends Component {
 
   render() { 
     return (
-      <div className='page'>
-        <select onChange={this.colorSelectHandler}>
+      <main className='page'>
+        {this.renderGrid()}
+        <div className='menu'>
+          <div className='menu__button-container'>
+            <button className="menu__button" onClick={this.playHandler}>
+              <img className="menu__button-image" src={this.state.playing ? pauseIcon : playIcon} alt="play/pause"/>
+            </button>
+            <button className="menu__button" onClick={this.stepHandler}>
+              <img className="menu__button-image" src={nextIcon} alt="next step"/>
+            </button>
+            <button className="menu__button" onClick={this.randomBoardHandler}>
+              <img className="menu__button-image" src={randomIcon} alt="random canvas"/>
+            </button>
+            <button className="menu__button" onClick={this.clearCanvasHandler}>
+              <img className="menu__button-image" src={clearIcon} alt="clear canvas"/>
+            </button>
+          </div>
+          <select onChange={this.colorSelectHandler}>
           {
             colors.map(color => {
               return (
@@ -163,12 +185,8 @@ class CanvasPage extends Component {
             })
           }
         </select>
-        {this.renderGrid()}
-        <button onClick={this.stepHandler}>Next Step</button>
-        <button onClick={this.clearCanvasHandler}>Clear Canvas</button>
-        <button onClick={this.randomBoardHandler}>Random Canvas</button>
-        <button onClick={this.playHandler}>{this.state.playing ? "Pause" : "Play"}</button>
-      </div>
+        </div>
+      </main>
     );
   }
 }
