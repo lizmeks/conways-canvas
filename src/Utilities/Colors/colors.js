@@ -93,9 +93,9 @@ const colors = [
   {
     name: "purple",
     value: {
-      red: 63,
-      green: 72,
-      blue: 204
+      red: 163,
+      green: 73,
+      blue: 164
     },
     id: 10
   },
