@@ -9,6 +9,8 @@ import playIcon from '../../assets/icons/play-icon.svg';
 import pauseIcon from '../../assets/icons/pause-icon.svg';
 import clearIcon from '../../assets/icons/clear-icon.svg';
 import randomIcon from '../../assets/icons/random-icon.svg';
+import eraserIcon from '../../assets/icons/eraser-icon.svg';
+import pencilIcon from '../../assets/icons/pencil-icon.svg';
 
 class CanvasPage extends Component {
   state = { 
@@ -76,7 +78,7 @@ class CanvasPage extends Component {
       })
     });
     return (
-      <div className='tools__image' style={{width: `${(brushValue[0].length * 0.75) + (2/16)}rem`}}>
+      <div className='brushes__image' style={{width: `${(brushValue[0].length * 0.75) + (2/16)}rem`}}>
         { image }
       </div>
     )
@@ -86,7 +88,7 @@ class CanvasPage extends Component {
     const { selectedColor } = this.state;
     return (
       <div
-        className='tools__image-cell'
+        className='brushes__image-cell'
         key={`${x}, ${y}`}
         style={cell ? {backgroundColor: `rgb(${selectedColor.red}, ${selectedColor.green}, ${selectedColor.blue})`} : {backgroundColor: `rgb(255,255,255)`}}
       >
@@ -100,7 +102,7 @@ class CanvasPage extends Component {
         <button
           key={brush.id}
           value={brush.name}
-          className="tools__list-item"
+          className="brushes__list-item"
           onClick={() => this.brushSelectHandler(brush.name)}
         >
           {this.renderBrushImage(brush.value)}
@@ -215,41 +217,49 @@ class CanvasPage extends Component {
               })
             }
           </div>
-          <button onClick={this.eraseHandler}>{this.state.erase ? "Erase: On" : "Erase: Off"}</button>
           <div className='tools'>
-            <div className='tools__container'>
-              <p className='tools__text'>Paint Tools</p>
-              <div className='tools__list'>
-                {this.renderToolItems("paint tool")}
-              </div>
-            </div>
-            <div className='tools__container'>
-              <p className='tools__text'>Patterns</p>
-              <div className='tools__list'>
+            <button
+              className='tools__item'
+              onClick={() => this.brushSelectHandler("Dot")}
+            >
+              <img src={pencilIcon} alt="pencil"/>
+            </button>
+            <button
+              className='tools__item'
+              onClick={this.eraseHandler}
+              style={this.state.erase ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
+            >
+              <img src={eraserIcon} alt="eraser"/>
+            </button>
+          </div>
+          <div className='brushes'>
+            <div className='brushes__container'>
+              <p className='brushes__text'>Patterns</p>
+              <div className='brushes__list'>
                 {this.renderToolItems("pattern")}
               </div>
             </div>
-            <div className='tools__container'>
-              <p className='tools__text'>Still Lifes</p>
-              <div className='tools__list'>
+            <div className='brushes__container'>
+              <p className='brushes__text'>Still Lifes</p>
+              <div className='brushes__list'>
                 {this.renderToolItems("still life")}
               </div>
             </div>
-            <div className='tools__container'>
-              <p className='tools__text'>Oscillators</p>
-              <div className='tools__list'>
+            <div className='brushes__container'>
+              <p className='brushes__text'>Oscillators</p>
+              <div className='brushes__list'>
                 {this.renderToolItems("oscillator")}
               </div>
             </div>
-            <div className='tools__container'>
-              <p className='tools__text'>Spaceships</p>
-              <div className='tools__list'>
+            <div className='brushes__container'>
+              <p className='brushes__text'>Spaceships</p>
+              <div className='brushes__list'>
                 {this.renderToolItems("spaceship")}
               </div>
             </div>
-            <div className='tools__container'>
-              <p className='tools__text'>Guns</p>
-              <div className='tools__list'>
+            <div className='brushes__container'>
+              <p className='brushes__text'>Guns</p>
+              <div className='brushes__list'>
                 {this.renderToolItems("gun")}
               </div>
             </div>
