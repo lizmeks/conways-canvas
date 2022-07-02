@@ -106,4 +106,35 @@ const generateBlankBoard = (width, height) => {
   return board
 };
 
-export { generateBlankBoard, generateNextBoard }
+const generateRandomBoard = (width, height) => {
+  let board = [];
+  for (let y = 0; y < height; y++) {
+    board.push([]);
+    for (let x = 0; x < width; x++) {
+      let randomLife = Math.floor(Math.random() * 2);
+      if (randomLife === 0) {
+        board[y].push({
+          life: false,
+          color: {
+            red: 255,
+            green: 255,
+            blue: 255
+          }
+        })
+      }
+      else if (randomLife === 1) {
+        board[y].push({
+          life: true,
+          color: {
+            red: Math.floor(Math.random() * 256),
+            green: Math.floor(Math.random() * 256),
+            blue: Math.floor(Math.random() * 256)
+          }
+        })
+      }
+    };
+  };
+  return board
+};
+
+export { generateBlankBoard, generateNextBoard, generateRandomBoard }

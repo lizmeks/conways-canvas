@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import './styles/gridStyle.scss'
-import { generateBlankBoard, generateNextBoard } from './Utilities/EngineUtils/EngineUtils';
+import { generateBlankBoard, generateNextBoard, generateRandomBoard } from './Utilities/EngineUtils/EngineUtils';
 import brushes from './Utilities/Brushes/brushes';
 
 class App extends Component {
@@ -100,21 +100,28 @@ class App extends Component {
     this.setState({
       canvas: newCanvas
     })
-  }
+  };
 
   clearCanvasHandler = () => {
     this.setState({
       canvas: generateBlankBoard(100, 100)
     })
     this.pauseBoard();
-  }
+  };
 
   colorSelectHandler = (e) => {
     let selectedColor = JSON.parse(e.target.value)
     this.setState({
       selectedColor: selectedColor.color
     })
-  }
+  };
+
+  randomBoardHandler = () => {
+    this.pauseBoard();
+    this.setState({
+      canvas: generateNextBoard(generateRandomBoard(100, 100))
+    })
+  };
 
   render() { 
     return (
@@ -169,6 +176,7 @@ class App extends Component {
         {this.renderGrid()}
         <button onClick={this.stepHandler}>Next Step</button>
         <button onClick={this.clearCanvasHandler}>Clear Canvas</button>
+        <button onClick={this.randomBoardHandler}>Random Canvas</button>
         <button onClick={this.playHandler}>{this.state.playing ? "Pause" : "Play"}</button>
       </div>
     );
