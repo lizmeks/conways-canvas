@@ -116,8 +116,8 @@ class CanvasPage extends Component {
     this.pauseBoard();
   };
 
-  colorSelectHandler = (e) => {
-    let selectedColor = colors.find(color => color.name === e.target.value);
+  colorSelectHandler = (buttonColor) => {
+    let selectedColor = colors.find(color => color.name === buttonColor);
     this.setState({
       selectedColor: selectedColor.value
     })
@@ -156,20 +156,25 @@ class CanvasPage extends Component {
               <img className="menu__button-image" src={clearIcon} alt="clear canvas"/>
             </button>
           </div>
-          <select onChange={this.colorSelectHandler}>
+        <div className='palette'>
           {
             colors.map(color => {
               return (
-                <option
+                <button
+                  className='palette__button'
                   key={color.id}
-                  value={color.name}
+                  onClick={() => this.colorSelectHandler(color.name)}
                 >
-                  {color.name}
-                </option>
+                  <div
+                    className='palette__button--color'
+                    style={{backgroundColor: `rgb(${color.value.red}, ${color.value.green}, ${color.value.blue})`}}
+                  >
+                  </div>
+                </button>
               )
             })
           }
-        </select>
+        </div>
         <button onClick={this.eraseHandler}>{this.state.erase ? "Erase: On" : "Erase: Off"}</button>
         <select onChange={this.brushSelectHandler}>
           {
