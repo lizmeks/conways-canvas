@@ -28,6 +28,8 @@
 
 .palette {
   display: flex;
+  flex-wrap: wrap;
+  width: calc(2.25rem * 10);
   margin: 1rem 1rem 1rem 0;
 
   &__button {
@@ -38,7 +40,7 @@
     width: 2rem;
     border-radius: 8px;
     border: none;
-    margin-right: .25rem;
+    margin: 0 .25rem .25rem 0;
     cursor: pointer;
 
     &:focus {
