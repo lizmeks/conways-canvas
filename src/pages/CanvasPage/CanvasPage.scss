@@ -2,21 +2,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  flex-wrap: wrap;
   background-color: lightgray;
+  padding: 5rem 0;
 }
 
 .canvas {
   display: flex;
   flex-wrap: wrap;
-  width: calc(100 * .75rem);
-  height: calc(100 * .75rem);
+  width: 1200px;
+  height: 1200px;
   background-color: darkgray;
-  overflow: hidden;
+  overflow: auto;
+  margin-bottom: 2rem;
   
   &__cell {
-    width: .75rem;
-    height: .75rem;
+    width: 1%;
+    height: 1%;
     border-right: 1px solid rgba(128, 128, 128, .5);
     border-bottom: 1px solid rgba(128, 128, 128, .5);
   }
@@ -25,6 +27,7 @@
 
 .menu {
   margin-left: 1rem;
+  width: 32rem;
   
   &__button-container {
     display: flex;
@@ -107,7 +110,7 @@
     display: flex;
     flex-wrap: wrap;
     height: 8rem;
-    width: 32rem;
+    width: 100%;
     background-color: grey;
     box-shadow: inset 0px 0px 10px 4px #D3D3D3;
     border-radius: 8px;
