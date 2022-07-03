@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import '../../styles/gridStyle.scss';
+import '../../styles/global.scss';
 import './CanvasPage.scss';
 import { generateBlankBoard, generateNextBoard, generateRandomBoard } from '../../Utilities/EngineUtils/EngineUtils';
 import brushes from '../../Utilities/Brushes/brushes';
