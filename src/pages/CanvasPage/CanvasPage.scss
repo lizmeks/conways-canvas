@@ -1,3 +1,28 @@
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: lightgray;
+}
+
+.canvas {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100 * .75rem);
+  height: calc(100 * .75rem);
+  background-color: darkgray;
+  overflow: hidden;
+  
+  &__cell {
+    width: .75rem;
+    height: .75rem;
+    border-right: 1px solid rgba(128, 128, 128, .5);
+    border-bottom: 1px solid rgba(128, 128, 128, .5);
+  }
+}
+
+
 .menu {
   margin-left: 1rem;
   

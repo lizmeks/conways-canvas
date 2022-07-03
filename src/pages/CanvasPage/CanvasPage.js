@@ -16,13 +16,15 @@ class CanvasPage extends Component {
   state = { 
     canvas: generateBlankBoard(100, 100),
     playing: false,
-    selectedColor: {
+    colorValue: {
       red: 0,
       green: 0,
       blue: 0
     },
+    colorName: "black",
     erase: false,
-    brush: brushes[0].value
+    brushValue: brushes[0].value,
+    brushName: "Dot"
   }
 
   playInterval = undefined;
@@ -49,7 +51,7 @@ class CanvasPage extends Component {
   renderGridCell = (cell, x, y) => {
     return (
       <div
-        className='grid-cell'
+        className='canvas__cell'
         key={`${x}, ${y}`}
         style={{backgroundColor: `rgb(${cell.color.red}, ${cell.color.green}, ${cell.color.blue})`}}
         onClick={() => this.paintHandler(x, y)}
@@ -65,7 +67,7 @@ class CanvasPage extends Component {
       })
     });
     return (
-      <div className='grid-container' >
+      <div className='canvas'>
         { grid }
       </div>
     )
@@ -85,12 +87,12 @@ class CanvasPage extends Component {
   }
 
   renderBrushImageCell = (cell, x, y) => {
-    const { selectedColor } = this.state;
+    const { colorValue } = this.state;
     return (
       <div
         className='brushes__image-cell'
         key={`${x}, ${y}`}
-        style={cell ? {backgroundColor: `rgb(${selectedColor.red}, ${selectedColor.green}, ${selectedColor.blue})`} : {backgroundColor: `rgb(255,255,255)`}}
+        style={cell ? {backgroundColor: `rgb(${colorValue.red}, ${colorValue.green}, ${colorValue.blue})`} : {backgroundColor: `rgb(255,255,255)`}}
       >
       </div>
     )
@@ -104,6 +106,7 @@ class CanvasPage extends Component {
           value={brush.name}
           className="brushes__list-item"
           onClick={() => this.brushSelectHandler(brush.name)}
+          style={this.state.brushName === brush.name ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
         >
           {this.renderBrushImage(brush.value)}
         </button>
@@ -112,16 +115,16 @@ class CanvasPage extends Component {
   };
 
   paintHandler = (clickX, clickY) => {
-    let { canvas, brush, selectedColor, erase } = this.state;
+    let { canvas, brushValue, colorValue, erase } = this.state;
 
-    brush.forEach((brushRow, brushY) => {
+    brushValue.forEach((brushRow, brushY) => {
       brushRow.forEach((brushCell, brushX) => {
         if(brushCell === 1) { 
-          let targetY = clickY + brushY - (Math.floor(brush.length / 2));
-          let targetX = clickX + brushX - (Math.floor(brush[0].length / 2));
+          let targetY = clickY + brushY - (Math.floor(brushValue.length / 2));
+          let targetX = clickX + brushX - (Math.floor(brushValue[0].length / 2));
           if(canvas[targetY] && canvas[targetY][targetX ]) { 
             canvas[targetY][targetX] = {
-              color: erase ? {red: 255, green: 255, blue: 255} : selectedColor,
+              color: erase ? {red: 255, green: 255, blue: 255} : colorValue,
               life: erase ? false : true
             }
           } 
@@ -161,7 +164,9 @@ class CanvasPage extends Component {
   colorSelectHandler = (colorName) => {
     let selectedColor = colors.find(color => color.name === colorName);
     this.setState({
-      selectedColor: selectedColor.value
+      colorValue: selectedColor.value,
+      colorName: selectedColor.name,
+      erase: false
     })
   };
 
@@ -173,9 +178,10 @@ class CanvasPage extends Component {
   };
 
   brushSelectHandler = (brushName) => {
-    let selectedBrush = brushes.find(element => element.name === brushName);
+    let selectedBrush = brushes.find(brush => brush.name === brushName);
     this.setState({
-      brush: selectedBrush.value
+      brushValue: selectedBrush.value,
+      brushName: selectedBrush.name
     })
   };
 
@@ -206,6 +212,7 @@ class CanvasPage extends Component {
                     className='palette__button'
                     key={color.id}
                     onClick={() => this.colorSelectHandler(color.name)}
+                    style={this.state.colorName === color.name ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
                   >
                     <div
                       className='palette__button--color'
@@ -221,6 +228,7 @@ class CanvasPage extends Component {
             <button
               className='tools__item'
               onClick={() => this.brushSelectHandler("Dot")}
+              style={this.state.brushName === "Dot" ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
             >
               <img src={pencilIcon} alt="pencil"/>
             </button>

@@ -114,6 +114,7 @@ const generateRandomBoard = (width, height) => {
       let randomLife = Math.floor(Math.random() * 2);
       if (randomLife === 0) {
         board[y].push({
+          
           life: false,
           color: {
             red: 255,
