@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  background-color: lightgray;
+  background-image: 
+    linear-gradient(to bottom, rgba(50, 50, 50, .3), rgba(50, 50, 50, .3)),
+    url(../assets/images/splash-background.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 1rem 5rem 0 5rem;
+  border-bottom: 2px solid black;
+
+  &__logo {
+    height: 5rem;
+    margin-bottom: 1rem;
+  }
+
+  &__link-container {
+    display: flex;
+  }
+
+  &__link {
+    all: unset;
+    width: 5rem;
+    background-color: lightgray;
+    border: 2px solid black;
+    padding: 0 1rem 1rem 1rem;
+    border-bottom: none;
+    cursor: pointer;
+  }
+
+  &__link-text {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}

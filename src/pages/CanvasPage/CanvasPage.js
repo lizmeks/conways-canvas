@@ -11,6 +11,9 @@ import clearIcon from '../../assets/icons/clear-icon.svg';
 import randomIcon from '../../assets/icons/random-icon.svg';
 import eraserIcon from '../../assets/icons/eraser-icon.svg';
 import pencilIcon from '../../assets/icons/pencil-icon.svg';
+import { NavLink } from 'react-router-dom';
+import logo from '../../assets/images/splash-logo.png';
+import '../../styles/header.scss';
 
 class CanvasPage extends Component {
   state = { 
@@ -187,93 +190,109 @@ class CanvasPage extends Component {
 
   render() { 
     return (
-      <main className='page'>
-        {this.renderGrid()}
-        <div className='menu'>
-          <div className='menu__button-container'>
-            <button className="menu__button" onClick={this.playHandler}>
-              <img className="menu__button-image" src={this.state.playing ? pauseIcon : playIcon} alt="play/pause"/>
-            </button>
-            <button className="menu__button" onClick={this.stepHandler}>
-              <img className="menu__button-image" src={nextIcon} alt="next step"/>
-            </button>
-            <button className="menu__button" onClick={this.randomBoardHandler}>
-              <img className="menu__button-image" src={randomIcon} alt="random canvas"/>
-            </button>
-            <button className="menu__button" onClick={this.clearCanvasHandler}>
-              <img className="menu__button-image" src={clearIcon} alt="clear canvas"/>
-            </button>
+      <>
+        <header className='header'>
+          <div className='header__link-container'>
+            <NavLink className='header__link' to={'/'}>
+              <p className='header__link-text'>Login</p>
+            </NavLink>
+            <NavLink className='header__link' to={'/canvas'}>
+              <p className='header__link-text'>Canvas</p>
+            </NavLink>
+            <NavLink className='header__link' to={'/rules'}>
+              <p className='header__link-text'>Rules</p>
+            </NavLink>
           </div>
-          <div className='palette'>
-            {
-              colors.map(color => {
-                return (
-                  <button
-                    className='palette__button'
-                    key={color.id}
-                    onClick={() => this.colorSelectHandler(color.name)}
-                    style={this.state.colorName === color.name ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
-                  >
-                    <div
-                      className='palette__button--color'
-                      style={{backgroundColor: `rgb(${color.value.red}, ${color.value.green}, ${color.value.blue})`}}
+          <img className='header__logo' src={logo} alt='logo' />
+        </header>
+        <main className='page'>
+          {this.renderGrid()}
+          <div className='menu'>
+            <div className='menu__button-container'>
+              <button className="menu__button" onClick={this.playHandler}>
+                <img className="menu__button-image" src={this.state.playing ? pauseIcon : playIcon} alt="play/pause"/>
+              </button>
+              <button className="menu__button" onClick={this.stepHandler}>
+                <img className="menu__button-image" src={nextIcon} alt="next step"/>
+              </button>
+              <button className="menu__button" onClick={this.randomBoardHandler}>
+                <img className="menu__button-image" src={randomIcon} alt="random canvas"/>
+              </button>
+              <button className="menu__button" onClick={this.clearCanvasHandler}>
+                <img className="menu__button-image" src={clearIcon} alt="clear canvas"/>
+              </button>
+            </div>
+            <div className='palette'>
+              {
+                colors.map(color => {
+                  return (
+                    <button
+                      className='palette__button'
+                      key={color.id}
+                      onClick={() => this.colorSelectHandler(color.name)}
+                      style={this.state.colorName === color.name ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
                     >
-                    </div>
-                  </button>
-                )
-              })
-            }
+                      <div
+                        className='palette__button--color'
+                        style={{backgroundColor: `rgb(${color.value.red}, ${color.value.green}, ${color.value.blue})`}}
+                      >
+                      </div>
+                    </button>
+                  )
+                })
+              }
+            </div>
+            <div className='tools'>
+              <button
+                className='tools__item'
+                onClick={() => this.brushSelectHandler("Dot")}
+                style={this.state.brushName === "Dot" ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
+              >
+                <img className='tools__item-image' src={pencilIcon} alt="pencil"/>
+              </button>
+              <button
+                className='tools__item'
+                onClick={this.eraseHandler}
+                style={this.state.erase ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
+              >
+                <img src={eraserIcon} alt="eraser"/>
+              </button>
+            </div>
+            <div className='brushes'>
+              <div className='brushes__container'>
+                <p className='brushes__text'>Patterns</p>
+                <div className='brushes__list'>
+                  {this.renderToolItems("pattern")}
+                </div>
+              </div>
+              <div className='brushes__container'>
+                <p className='brushes__text'>Still Lifes</p>
+                <div className='brushes__list'>
+                  {this.renderToolItems("still life")}
+                </div>
+              </div>
+              <div className='brushes__container'>
+                <p className='brushes__text'>Oscillators</p>
+                <div className='brushes__list'>
+                  {this.renderToolItems("oscillator")}
+                </div>
+              </div>
+              <div className='brushes__container'>
+                <p className='brushes__text'>Spaceships</p>
+                <div className='brushes__list'>
+                  {this.renderToolItems("spaceship")}
+                </div>
+              </div>
+              <div className='brushes__container'>
+                <p className='brushes__text'>Guns</p>
+                <div className='brushes__list'>
+                  {this.renderToolItems("gun")}
+                </div>
+              </div>
+            </div>
           </div>
-          <div className='tools'>
-            <button
-              className='tools__item'
-              onClick={() => this.brushSelectHandler("Dot")}
-              style={this.state.brushName === "Dot" ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
-            >
-              <img className='tools__item-image' src={pencilIcon} alt="pencil"/>
-            </button>
-            <button
-              className='tools__item'
-              onClick={this.eraseHandler}
-              style={this.state.erase ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
-            >
-              <img src={eraserIcon} alt="eraser"/>
-            </button>
-          </div>
-          <div className='brushes'>
-            <div className='brushes__container'>
-              <p className='brushes__text'>Patterns</p>
-              <div className='brushes__list'>
-                {this.renderToolItems("pattern")}
-              </div>
-            </div>
-            <div className='brushes__container'>
-              <p className='brushes__text'>Still Lifes</p>
-              <div className='brushes__list'>
-                {this.renderToolItems("still life")}
-              </div>
-            </div>
-            <div className='brushes__container'>
-              <p className='brushes__text'>Oscillators</p>
-              <div className='brushes__list'>
-                {this.renderToolItems("oscillator")}
-              </div>
-            </div>
-            <div className='brushes__container'>
-              <p className='brushes__text'>Spaceships</p>
-              <div className='brushes__list'>
-                {this.renderToolItems("spaceship")}
-              </div>
-            </div>
-            <div className='brushes__container'>
-              <p className='brushes__text'>Guns</p>
-              <div className='brushes__list'>
-                {this.renderToolItems("gun")}
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
+        </main>
+      </>
     );
   }
 }
