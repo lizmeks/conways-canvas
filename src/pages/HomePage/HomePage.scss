@@ -1,0 +1,10 @@
+.splash {
+  height: 100vh;
+  width: 100vw;
+  background-color: lightgray;
+  background-image: 
+    linear-gradient(to bottom, rgba(50, 50, 50, .3), rgba(50, 50, 50, .3)),
+    url(../../assets/images/splash-background.png);
+  background-size: cover;
+  filter: blur(8px)
+}
