@@ -1,0 +1,29 @@
+.rules {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: lightgray;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    width: 35%;
+    padding: 1rem;
+    border: 2px solid black;
+    margin-top: 4rem;
+  }
+
+  &__image {
+    height: 5rem;
+    background-color: lightgray;
+    border: 1px solid black;
+  }
+
+  &__text {
+    font-size: 1.25rem;
+    margin-right: 5rem;
+  }
+}
