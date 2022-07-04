@@ -230,7 +230,7 @@ class CanvasPage extends Component {
               onClick={() => this.brushSelectHandler("Dot")}
               style={this.state.brushName === "Dot" ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
             >
-              <img src={pencilIcon} alt="pencil"/>
+              <img className='tools__item-image' src={pencilIcon} alt="pencil"/>
             </button>
             <button
               className='tools__item'
