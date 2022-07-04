@@ -1,29 +1,14 @@
-import { NavLink } from 'react-router-dom';
-import logo from '../../assets/images/splash-logo.png';
 import './RulesPage.scss';
-import '../../styles/header.scss';
 import ruleOne from '../../assets/images/rules-one.png';
 import ruleTwo from '../../assets/images/rules-two.png';
 import ruleThree from '../../assets/images/rules-three.png';
 import ruleFour from '../../assets/images/rules-four.png';
+import PageHeader from '../../components/PageHeader/PageHeader';
 
 const RulesPage = () => {
   return (
     <>
-      <header className='header'>
-            <div className='header__link-container'>
-              <NavLink className='header__link' to={'/'}>
-                <p className='header__link-text'>Login</p>
-              </NavLink>
-              <NavLink className='header__link' to={'/canvas'}>
-                <p className='header__link-text'>Canvas</p>
-              </NavLink>
-              <NavLink className='header__link' to={'/rules'}>
-                <p className='header__link-text'>Rules</p>
-              </NavLink>
-            </div>
-            <img className='header__logo' src={logo} alt='logo' />
-          </header>
+      <PageHeader />
       <main className='rules'>
         <div className='rules__container'>
           <p className='rules__text'>
