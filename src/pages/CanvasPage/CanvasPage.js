@@ -16,6 +16,7 @@ import loadIcon from '../../assets/icons/load-icon.svg';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import axios from 'axios';
 
+
 class CanvasPage extends Component {
   state = { 
     canvas: generateBlankBoard(100, 100),
@@ -48,6 +49,20 @@ class CanvasPage extends Component {
         console.error(error.message);
         console.error('Could not retrieve premade canvas list')
       })
+  };
+
+  retrieveSelectedPreset = (e) => {
+    this.pauseBoard();
+    return axios.get(`http://localhost:8000/presets/${e.target.value}`)
+      .then(response => {
+        this.setState({
+          canvas: response.data
+        })
+      })
+      .catch(error => {
+        console.error(error.message);
+        console.error('Could not retrieve canvas with this id')
+      });
   };
 
 
@@ -235,13 +250,13 @@ class CanvasPage extends Component {
         <main className='page'>
           {this.renderGrid()}
           <div className='menu'>
-            <select className='menu__preset-select'>
+            <select className='menu__preset-select' onChange={this.retrieveSelectedPreset}>
               <option className='menu__preset-option'>- Load a Premade Canvas -</option>
               {
                 presetList.map(canvas => (
                   <option
                     key={canvas.id}
-                    value={canvas.name}
+                    value={canvas.id}
                   >
                     {canvas.name}
                   </option>
