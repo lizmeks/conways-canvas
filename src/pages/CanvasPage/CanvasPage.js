@@ -14,6 +14,7 @@ import pencilIcon from '../../assets/icons/pencil-icon.svg';
 import saveIcon from '../../assets/icons/save-icon.svg';
 import loadIcon from '../../assets/icons/load-icon.svg';
 import PageHeader from '../../components/PageHeader/PageHeader';
+import axios from 'axios';
 
 class CanvasPage extends Component {
   state = { 
@@ -27,10 +28,28 @@ class CanvasPage extends Component {
     colorName: "black",
     erase: false,
     brushValue: brushes[0].value,
-    brushName: "Dot"
+    brushName: "Dot",
+    presetList: undefined
   }
 
   playInterval = undefined;
+
+  componentDidMount() {
+    this.retrievePresetList().then(response => {
+      this.setState({
+        presetList: response.data
+      })
+    })
+  };
+
+  retrievePresetList = () => {
+    return axios.get('http://localhost:8000/presets')
+      .catch(error => {
+        console.error(error.message);
+        console.error('Could not retrieve premade canvas list')
+      })
+  };
+
 
   playHandler = () => {
     if (!this.state.playing) {
@@ -203,12 +222,32 @@ class CanvasPage extends Component {
   };
 
   render() { 
+
+    const { presetList } = this.state;
+
+    if (!presetList) {
+      return <main>Loading please wait</main>
+    }
+
     return (
       <>
         <PageHeader />
         <main className='page'>
           {this.renderGrid()}
           <div className='menu'>
+            <select className='menu__preset-select'>
+              <option className='menu__preset-option'>- Load a Premade Canvas -</option>
+              {
+                presetList.map(canvas => (
+                  <option
+                    key={canvas.id}
+                    value={canvas.name}
+                  >
+                    {canvas.name}
+                  </option>
+                ))
+              }
+            </select>
             <div className='menu__save-container'>
               <button className="menu__button" onClick={this.saveHandler}>
                 <img className="menu__button-image" src={saveIcon} alt="save"/>
