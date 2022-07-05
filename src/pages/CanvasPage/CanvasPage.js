@@ -11,6 +11,8 @@ import clearIcon from '../../assets/icons/clear-icon.svg';
 import randomIcon from '../../assets/icons/random-icon.svg';
 import eraserIcon from '../../assets/icons/eraser-icon.svg';
 import pencilIcon from '../../assets/icons/pencil-icon.svg';
+import saveIcon from '../../assets/icons/save-icon.svg';
+import loadIcon from '../../assets/icons/load-icon.svg';
 import PageHeader from '../../components/PageHeader/PageHeader';
 
 class CanvasPage extends Component {
@@ -186,6 +188,20 @@ class CanvasPage extends Component {
     })
   };
 
+  saveHandler = () => {
+    this.pauseBoard();
+    localStorage.setItem("savedCanvas", JSON.stringify(this.state.canvas));
+  };
+
+  loadHandler = () => {
+    if (localStorage.savedCanvas) {
+      this.pauseBoard();
+      this.setState({
+        canvas: JSON.parse(localStorage.savedCanvas)
+      })
+    }
+  };
+
   render() { 
     return (
       <>
@@ -193,6 +209,14 @@ class CanvasPage extends Component {
         <main className='page'>
           {this.renderGrid()}
           <div className='menu'>
+            <div className='menu__save-container'>
+              <button className="menu__button" onClick={this.saveHandler}>
+                <img className="menu__button-image" src={saveIcon} alt="save"/>
+              </button>
+              <button className="menu__button" onClick={this.loadHandler}>
+                <img className="menu__button-image" src={loadIcon} alt="load"/>
+              </button>
+            </div>
             <div className='menu__button-container'>
               <button className="menu__button" onClick={this.playHandler}>
                 <img className="menu__button-image" src={this.state.playing ? pauseIcon : playIcon} alt="play/pause"/>

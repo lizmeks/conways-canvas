@@ -29,6 +29,11 @@
   margin-left: 1rem;
   width: 32rem;
   
+  &__save-container {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+
   &__button-container {
     display: flex;
   }
