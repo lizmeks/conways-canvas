@@ -28,6 +28,22 @@
 .menu {
   margin-left: 1rem;
   width: 32rem;
+
+  &__preset-select {
+    height: 2rem;
+    font-size: 1.25rem;
+    background-color: grey;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  &__preset-option {
+    font-size: 1.25rem;
+    text-align: center;
+    background-color: grey;
+    color: white;
+  }
   
   &__save-container {
     display: flex;

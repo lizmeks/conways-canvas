@@ -255,6 +255,7 @@ class CanvasPage extends Component {
               {
                 presetList.map(canvas => (
                   <option
+                    className='menu__preset-option'
                     key={canvas.id}
                     value={canvas.id}
                   >
