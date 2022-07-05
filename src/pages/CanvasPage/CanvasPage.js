@@ -44,7 +44,7 @@ class CanvasPage extends Component {
   };
 
   retrievePresetList = () => {
-    return axios.get('http://localhost:8000/presets')
+    return axios.get('https://conways-canvas-backend.herokuapp.com/presets')
       .catch(error => {
         console.error(error.message);
         console.error('Could not retrieve premade canvas list')
@@ -53,7 +53,7 @@ class CanvasPage extends Component {
 
   retrieveSelectedPreset = (e) => {
     this.pauseBoard();
-    return axios.get(`http://localhost:8000/presets/${e.target.value}`)
+    return axios.get(`https://conways-canvas-backend.herokuapp.com/presets/${e.target.value}`)
       .then(response => {
         this.setState({
           canvas: response.data
