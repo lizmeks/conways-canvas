@@ -7,7 +7,7 @@ const PageHeader = () => {
     <header className='header'>
       <div className='header__link-container'>
         <NavLink className='header__link' to={'/'}>
-          <p className='header__link-text'>Login</p>
+          <p className='header__link-text'>Home</p>
         </NavLink>
         <NavLink className='header__link' to={'/canvas'}>
           <p className='header__link-text'>Canvas</p>

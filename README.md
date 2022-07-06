@@ -40,3 +40,7 @@ The server-side repostitory can be found here: https://github.com/lizardskelly/c
 3.) In client-side app's installation folder, open the config.js file.
 
 4.) Change 'SERVER_TARGET' to http://localhost:8080. 
+
+## Credits
+
+All .svg icons sourced from www.svgrepo.com
