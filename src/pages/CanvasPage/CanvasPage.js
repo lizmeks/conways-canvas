@@ -52,8 +52,8 @@ class CanvasPage extends Component {
       })
   };
 
-  retrieveSelectedPreset = (e) => {
-    if(SERVER_ENABLED) {
+  retrieveSelectedPreset = e => {
+    if(SERVER_ENABLED && e.target.value) {
       this.pauseBoard();
       return axios.get(`${SERVER_TARGET}/presets/${e.target.value}`)
         .then(response => {
@@ -250,7 +250,7 @@ class CanvasPage extends Component {
           {this.renderGrid()}
           <div className='menu'>
             <select className='menu__preset-select' onChange={this.retrieveSelectedPreset}>
-              <option className='menu__preset-option'>- Load a Premade Canvas -</option>
+              <option className='menu__preset-option' value="">- Load a Premade Canvas -</option>
               {
                 presetList.map(canvas => (
                   <option
