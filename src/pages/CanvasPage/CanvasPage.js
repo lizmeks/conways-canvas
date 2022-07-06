@@ -15,8 +15,7 @@ import saveIcon from '../../assets/icons/save-icon.svg';
 import loadIcon from '../../assets/icons/load-icon.svg';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import axios from 'axios';
-
-
+import { SERVER_ENABLED, SERVER_TARGET } from '../../config';
 class CanvasPage extends Component {
   state = { 
     canvas: generateBlankBoard(100, 100),
@@ -30,21 +29,23 @@ class CanvasPage extends Component {
     erase: false,
     brushValue: brushes[0].value,
     brushName: "Dot",
-    presetList: undefined
+    presetList: []
   }
 
   playInterval = undefined;
 
   componentDidMount() {
-    this.retrievePresetList().then(response => {
-      this.setState({
-        presetList: response.data
+    if(SERVER_ENABLED) {
+      this.retrievePresetList().then(response => {
+        this.setState({
+          presetList: response.data
+        })
       })
-    })
+    }
   };
 
   retrievePresetList = () => {
-    return axios.get('https://conways-canvas-backend.herokuapp.com/presets')
+    return axios.get(`${SERVER_TARGET}/presets`)
       .catch(error => {
         console.error(error.message);
         console.error('Could not retrieve premade canvas list')
@@ -52,17 +53,19 @@ class CanvasPage extends Component {
   };
 
   retrieveSelectedPreset = (e) => {
-    this.pauseBoard();
-    return axios.get(`https://conways-canvas-backend.herokuapp.com/presets/${e.target.value}`)
-      .then(response => {
-        this.setState({
-          canvas: response.data
+    if(SERVER_ENABLED) {
+      this.pauseBoard();
+      return axios.get(`${SERVER_TARGET}/presets/${e.target.value}`)
+        .then(response => {
+          this.setState({
+            canvas: response.data
+          })
         })
-      })
-      .catch(error => {
-        console.error(error.message);
-        console.error('Could not retrieve canvas with this id')
-      });
+        .catch(error => {
+          console.error(error.message);
+          console.error('Could not retrieve canvas with this id')
+        });
+    }
   };
 
 
@@ -239,10 +242,6 @@ class CanvasPage extends Component {
   render() { 
 
     const { presetList } = this.state;
-
-    if (!presetList) {
-      return <main>Loading please wait</main>
-    }
 
     return (
       <>
