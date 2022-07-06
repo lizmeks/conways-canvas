@@ -1,7 +1,9 @@
 # Conway's Canvas
 
 Created by Elizabeth Meeker
+
 GitHub: https://github.com/lizardskelly
+
 LinkedIn: https://www.linkedin.com/in/elizabeth-meeker-83781b237/
 
 This app is deployed on Heroku: https://conways-canvas.herokuapp.com/
