@@ -18,7 +18,7 @@ import axios from 'axios';
 import { SERVER_ENABLED, SERVER_TARGET } from '../../config';
 class CanvasPage extends Component {
   state = { 
-    canvas: generateBlankBoard(100, 100),
+    canvas: generateBlankBoard(0, 0),
     playing: false,
     colorValue: {
       red: 0,
@@ -35,6 +35,7 @@ class CanvasPage extends Component {
   playInterval = undefined;
 
   componentDidMount() {
+    this.measureBoard();
     if(SERVER_ENABLED) {
       this.retrievePresetList().then(response => {
         this.setState({
@@ -68,6 +69,19 @@ class CanvasPage extends Component {
     }
   };
 
+  measureBoard = () => {
+    if (window.innerWidth > 1200) {
+      this.setState({
+        canvas: generateBlankBoard(100, 100)
+      })
+    }
+    else {
+      let canvasWidth = Math.floor((window.innerWidth / 12)) - 2;
+      this.setState({
+        canvas: generateBlankBoard(canvasWidth, 100)
+      })
+    }
+  };
 
   playHandler = () => {
     if (!this.state.playing) {
@@ -106,10 +120,17 @@ class CanvasPage extends Component {
         return this.renderGridCell(cell, x, y)
       })
     });
+    let gridWidth = '';
+    if (window.innerWidth > 1200) {
+      gridWidth = 1200;
+    }
+    else {
+      gridWidth = window.innerWidth - 24;
+    };
     return (
       <div
         className='canvas'
-        style={{width: '1200px', height: '1200px'}}
+        style={{width: gridWidth, height: '1200px'}}
       >
         { grid }
       </div>
@@ -198,9 +219,7 @@ class CanvasPage extends Component {
   };
 
   clearCanvasHandler = () => {
-    this.setState({
-      canvas: generateBlankBoard(100, 100)
-    })
+    this.measureBoard();
     this.pauseBoard();
   };
 
