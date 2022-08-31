@@ -10,15 +10,13 @@
 .canvas {
   display: flex;
   flex-wrap: wrap;
-  width: 1200px;
-  height: 1200px;
   background-color: darkgray;
-  overflow: auto;
+  overflow: hidden;
   margin-bottom: 2rem;
   
   &__cell {
-    width: 1%;
-    height: 1%;
+    width: 12px;
+    height: 12px;
     border-right: 1px solid rgba(128, 128, 128, .5);
     border-bottom: 1px solid rgba(128, 128, 128, .5);
   }

@@ -107,7 +107,10 @@ class CanvasPage extends Component {
       })
     });
     return (
-      <div className='canvas'>
+      <div
+        className='canvas'
+        style={{width: '1200px', height: '1200px'}}
+      >
         { grid }
       </div>
     )
