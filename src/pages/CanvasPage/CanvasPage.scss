@@ -137,7 +137,29 @@
 }
 
 .tools {
-  display: flex;
+
+  &__invisible {
+    margin-left: 1rem;
+    width: 32rem;
+    height: 2.5rem;
+    overflow: hidden;
+    transition: height 250ms;
+  }
+
+  &__visible {
+    margin-left: 1rem;
+    width: 32rem;
+    height: 10rem;
+    transition: height 250ms;
+  }
+
+  &__title {
+    font-size: 2rem;
+  }
+  
+  &__container {
+    display: flex;
+  }
 
   &__item {
     display: flex;

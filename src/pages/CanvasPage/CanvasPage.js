@@ -347,21 +347,24 @@ class CanvasPage extends Component {
                 }
               </div>
             </div>
-            <div className='tools'>
-              <button
-                className='tools__item'
-                onClick={() => this.brushSelectHandler("Dot")}
-                style={this.state.brushName === "Dot" ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
-              >
-                <img className='tools__item-image' src={pencilIcon} alt="pencil"/>
-              </button>
-              <button
-                className='tools__item'
-                onClick={this.eraseHandler}
-                style={this.state.erase ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
-              >
-                <img src={eraserIcon} alt="eraser"/>
-              </button>
+            <div className={this.state.visibleMenu === 'tools' ? 'tools__visible' : 'tools__invisible'}>
+              <button className='tools__title' onClick={() => this.expandMenuHandler('tools')}> Tools </button>
+              <div className='tools__container'>
+                <button
+                  className='tools__item'
+                  onClick={() => this.brushSelectHandler("Dot")}
+                  style={this.state.brushName === "Dot" ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
+                >
+                  <img className='tools__item-image' src={pencilIcon} alt="pencil"/>
+                </button>
+                <button
+                  className='tools__item'
+                  onClick={this.eraseHandler}
+                  style={this.state.erase ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
+                >
+                  <img src={eraserIcon} alt="eraser"/>
+                </button>
+              </div>
             </div>
             <div className='brushes'>
               <div className='brushes__container'>
