@@ -30,7 +30,8 @@ class CanvasPage extends Component {
     erase: false,
     brushValue: brushes[0].value,
     brushName: "Dot",
-    presetList: []
+    presetList: [],
+    visibleMenu: undefined
   }
 
   playInterval = undefined;
@@ -263,6 +264,19 @@ class CanvasPage extends Component {
     }
   };
 
+  expandMenuHandler = menu => {
+    if (this.state.visibleMenu === menu) {
+      this.setState({
+        visibleMenu: undefined
+      })
+    }
+    else {
+      this.setState({
+        visibleMenu: menu
+      })
+    }
+  };
+
   render() { 
 
     const { presetList } = this.state;
@@ -287,47 +301,51 @@ class CanvasPage extends Component {
                 ))
               }
             </select>
-            <div className='menu__save-container'>
-              <button className="menu__button" onClick={this.saveHandler}>
-                <img className="menu__button-image" src={saveIcon} alt="save"/>
-              </button>
-              <button className="menu__button" onClick={this.loadHandler}>
-                <img className="menu__button-image" src={loadIcon} alt="load"/>
-              </button>
+            <div className={this.state.visibleMenu === 'options' ? 'options__visible' : 'options__invisible'}>
+              <button className='options__title' onClick={() => this.expandMenuHandler('options')}> Options </button>
+              <div className='options__button-container'>
+                <button className="options__button" onClick={this.playHandler}>
+                  <img className="options__button-image" src={this.state.playing ? pauseIcon : playIcon} alt="play/pause"/>
+                </button>
+                <button className="options__button" onClick={this.stepHandler}>
+                  <img className="options__button-image" src={nextIcon} alt="next step"/>
+                </button>
+                <button className="options__button" onClick={this.randomBoardHandler}>
+                  <img className="options__button-image" src={randomIcon} alt="random canvas"/>
+                </button>
+                <button className="options__button" onClick={this.clearCanvasHandler}>
+                  <img className="options__button-image" src={clearIcon} alt="clear canvas"/>
+                </button>
+                <button className="options__button" onClick={this.saveHandler}>
+                  <img className="options__button-image" src={saveIcon} alt="save"/>
+                </button>
+                <button className="options__button" onClick={this.loadHandler}>
+                  <img className="options__button-image" src={loadIcon} alt="load"/>
+                </button>
+              </div>
             </div>
-            <div className='menu__button-container'>
-              <button className="menu__button" onClick={this.playHandler}>
-                <img className="menu__button-image" src={this.state.playing ? pauseIcon : playIcon} alt="play/pause"/>
-              </button>
-              <button className="menu__button" onClick={this.stepHandler}>
-                <img className="menu__button-image" src={nextIcon} alt="next step"/>
-              </button>
-              <button className="menu__button" onClick={this.randomBoardHandler}>
-                <img className="menu__button-image" src={randomIcon} alt="random canvas"/>
-              </button>
-              <button className="menu__button" onClick={this.clearCanvasHandler}>
-                <img className="menu__button-image" src={clearIcon} alt="clear canvas"/>
-              </button>
-            </div>
-            <div className='palette'>
-              {
-                colors.map(color => {
-                  return (
-                    <button
-                      className='palette__button'
-                      key={color.id}
-                      onClick={() => this.colorSelectHandler(color.name)}
-                      style={this.state.colorName === color.name ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
-                    >
-                      <div
-                        className='palette__button--color'
-                        style={{backgroundColor: `rgb(${color.value.red}, ${color.value.green}, ${color.value.blue})`}}
+            <div className={this.state.visibleMenu === 'palette' ? 'palette__visible' : 'palette__invisible'}>
+              <button className='palette__title' onClick={() => this.expandMenuHandler('palette')}> Palette </button>
+              <div className='palette__container'>
+                {
+                  colors.map(color => {
+                    return (
+                      <button
+                        className='palette__button'
+                        key={color.id}
+                        onClick={() => this.colorSelectHandler(color.name)}
+                        style={this.state.colorName === color.name ? {boxShadow: "inset 0px 0px 10px 4px #999"} : {boxShadow: "none"}}
                       >
-                      </div>
-                    </button>
-                  )
-                })
-              }
+                        <div
+                          className='palette__button--color'
+                          style={{backgroundColor: `rgb(${color.value.red}, ${color.value.green}, ${color.value.blue})`}}
+                        >
+                        </div>
+                      </button>
+                    )
+                  })
+                }
+              </div>
             </div>
             <div className='tools'>
               <button

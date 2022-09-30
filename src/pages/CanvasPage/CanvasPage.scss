@@ -23,9 +23,26 @@
 }
 
 
-.menu {
-  margin-left: 1rem;
-  width: 32rem;
+.options {
+
+  &__invisible {
+    margin-left: 1rem;
+    width: 32rem;
+    height: 2.5rem;
+    overflow: hidden;
+    transition: height 250ms;
+  }
+
+  &__visible {
+    margin-left: 1rem;
+    width: 32rem;
+    height: 10rem;
+    transition: height 250ms;
+  }
+
+  &__title {
+    font-size: 2rem;
+  }
 
   &__preset-select {
     height: 2rem;
@@ -41,11 +58,6 @@
     text-align: center;
     background-color: grey;
     color: white;
-  }
-  
-  &__save-container {
-    display: flex;
-    margin-bottom: 1rem;
   }
 
   &__button-container {
@@ -74,10 +86,32 @@
 }
 
 .palette {
-  display: flex;
-  flex-wrap: wrap;
-  width: calc(2.25rem * 10);
-  margin: 1rem 1rem 1rem 0;
+
+  &__invisible {
+    margin-left: 1rem;
+    width: 32rem;
+    height: 2.5rem;
+    overflow: hidden;
+    transition: height 250ms;
+  }
+
+  &__visible {
+    margin-left: 1rem;
+    width: 32rem;
+    height: 10rem;
+    transition: height 250ms;
+  }
+
+  &__title {
+    font-size: 2rem;
+  }
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(2.25rem * 10);
+    margin: 1rem 1rem 1rem 0;
+  }
 
   &__button {
     display: flex;
