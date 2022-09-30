@@ -16,6 +16,7 @@ import loadIcon from '../../assets/icons/load-icon.svg';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import axios from 'axios';
 import { SERVER_ENABLED, SERVER_TARGET } from '../../config';
+import { debounce } from 'lodash';
 class CanvasPage extends Component {
   state = { 
     canvas: generateBlankBoard(0, 0),
@@ -43,6 +44,7 @@ class CanvasPage extends Component {
         })
       })
     }
+    window.addEventListener('resize', debounce(this.measureBoard, 100));
   };
 
   retrievePresetList = () => {
