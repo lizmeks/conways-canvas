@@ -301,7 +301,7 @@ class CanvasPage extends Component {
                 ))
               }
             </select>
-            <div className={this.state.visibleMenu === 'options' ? 'options__visible' : 'options__invisible'}>
+            <div className={this.state.visibleMenu === 'options' ? 'options__visible' : 'options__hidden'}>
               <button className='options__title' onClick={() => this.expandMenuHandler('options')}> Options </button>
               <div className='options__button-container'>
                 <button className="options__button" onClick={this.playHandler}>
@@ -324,7 +324,7 @@ class CanvasPage extends Component {
                 </button>
               </div>
             </div>
-            <div className={this.state.visibleMenu === 'palette' ? 'palette__visible' : 'palette__invisible'}>
+            <div className={this.state.visibleMenu === 'palette' ? 'palette__visible' : 'palette__hidden'}>
               <button className='palette__title' onClick={() => this.expandMenuHandler('palette')}> Palette </button>
               <div className='palette__container'>
                 {
@@ -347,7 +347,7 @@ class CanvasPage extends Component {
                 }
               </div>
             </div>
-            <div className={this.state.visibleMenu === 'tools' ? 'tools__visible' : 'tools__invisible'}>
+            <div className={this.state.visibleMenu === 'tools' ? 'tools__visible' : 'tools__hidden'}>
               <button className='tools__title' onClick={() => this.expandMenuHandler('tools')}> Tools </button>
               <div className='tools__container'>
                 <button
@@ -366,33 +366,33 @@ class CanvasPage extends Component {
                 </button>
               </div>
             </div>
-            <div className='brushes'>
-              <div className='brushes__container'>
-                <p className='brushes__text'>Patterns</p>
+            <div className='brushes__container'>
+              <div className={this.state.visibleMenu === 'patterns' ? 'brushes__visible' : 'brushes__hidden'}>
+                <button className='brushes__title' onClick={() => this.expandMenuHandler('patterns')}> Patterns </button>
                 <div className='brushes__list'>
                   {this.renderToolItems("pattern")}
                 </div>
               </div>
-              <div className='brushes__container'>
-                <p className='brushes__text'>Still Lifes</p>
+              <div className={this.state.visibleMenu === 'stillLifes' ? 'brushes__visible' : 'brushes__hidden'}>
+                <button className='brushes__title' onClick={() => this.expandMenuHandler('stillLifes')}> Still Lifes </button>
                 <div className='brushes__list'>
                   {this.renderToolItems("still life")}
                 </div>
               </div>
-              <div className='brushes__container'>
-                <p className='brushes__text'>Oscillators</p>
+              <div className={this.state.visibleMenu === 'oscillators' ? 'brushes__visible' : 'brushes__hidden'}>
+                <button className='brushes__title' onClick={() => this.expandMenuHandler('oscillators')}> Oscillators </button>
                 <div className='brushes__list'>
                   {this.renderToolItems("oscillator")}
                 </div>
               </div>
-              <div className='brushes__container'>
-                <p className='brushes__text'>Spaceships</p>
+              <div className={this.state.visibleMenu === 'spaceships' ? 'brushes__visible' : 'brushes__hidden'}>
+                <button className='brushes__title' onClick={() => this.expandMenuHandler('spaceships')}> Spaceships </button>
                 <div className='brushes__list'>
                   {this.renderToolItems("spaceship")}
                 </div>
               </div>
-              <div className='brushes__container'>
-                <p className='brushes__text'>Guns</p>
+              <div className={this.state.visibleMenu === 'guns' ? 'brushes__visible' : 'brushes__hidden'}>
+                <button className='brushes__title' onClick={() => this.expandMenuHandler('guns')}> Guns </button>
                 <div className='brushes__list'>
                   {this.renderToolItems("gun")}
                 </div>

@@ -25,8 +25,7 @@
 
 .options {
 
-  &__invisible {
-    margin-left: 1rem;
+  &__hidden {
     width: 32rem;
     height: 2.5rem;
     overflow: hidden;
@@ -34,7 +33,6 @@
   }
 
   &__visible {
-    margin-left: 1rem;
     width: 32rem;
     height: 10rem;
     transition: height 250ms;
@@ -87,8 +85,7 @@
 
 .palette {
 
-  &__invisible {
-    margin-left: 1rem;
+  &__hidden {
     width: 32rem;
     height: 2.5rem;
     overflow: hidden;
@@ -96,7 +93,6 @@
   }
 
   &__visible {
-    margin-left: 1rem;
     width: 32rem;
     height: 10rem;
     transition: height 250ms;
@@ -138,8 +134,7 @@
 
 .tools {
 
-  &__invisible {
-    margin-left: 1rem;
+  &__hidden {
     width: 32rem;
     height: 2.5rem;
     overflow: hidden;
@@ -147,7 +142,6 @@
   }
 
   &__visible {
-    margin-left: 1rem;
     width: 32rem;
     height: 10rem;
     transition: height 250ms;
@@ -179,18 +173,29 @@
 }
 
 .brushes {
-  margin: 1rem 1rem 1rem 0;
 
-  &__text {
-    font-size: 1.25rem;
-    margin-bottom: .25rem;
+  &__hidden {
+    width: 32rem;
+    height: 2.5rem;
+    overflow: hidden;
+    transition: height 250ms;
+  }
+
+  &__visible {
+    width: 32rem;
+    height: 10rem;
+    transition: height 250ms;
+  }
+
+  &__title {
+    font-size: 2rem;
   }
 
   &__list {
     display: flex;
     flex-wrap: wrap;
     height: 8rem;
-    width: 100%;
+    width: 20rem;
     background-color: grey;
     box-shadow: inset 0px 0px 10px 4px #D3D3D3;
     border-radius: 8px;
