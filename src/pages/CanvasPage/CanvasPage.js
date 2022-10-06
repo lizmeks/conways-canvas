@@ -239,7 +239,7 @@ class CanvasPage extends Component {
   randomBoardHandler = () => {
     this.pauseBoard();
     this.setState({
-      canvas: generateNextBoard(generateRandomBoard(100, 100))
+      canvas: generateNextBoard(generateRandomBoard(this.state.canvas.length, this.state.canvas[0].length))
     })
   };
 
