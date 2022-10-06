@@ -280,14 +280,14 @@ class CanvasPage extends Component {
 
   render() { 
 
-    const { presetList } = this.state;
+    // const { presetList } = this.state;
 
     return (
       <>
         <PageHeader />
         <main className='page'>
           <div className='menu'>
-            <select className='menu__preset-select' onChange={this.retrieveSelectedPreset}>
+            {/* <select className='menu__preset-select' onChange={this.retrieveSelectedPreset}>
               <option className='menu__preset-option' value="">- Load a Premade Canvas -</option>
               {
                 presetList.map(canvas => (
@@ -300,7 +300,7 @@ class CanvasPage extends Component {
                   </option>
                 ))
               }
-            </select>
+            </select> */}
             <div className='controls'>
               <button className='controls__title' onClick={() => this.expandMenuHandler('controls')}> Controls </button>
               <div className={this.state.visibleMenu === 'controls' ? 'controls__visible' : 'controls__hidden'}>
