@@ -1,10 +1,13 @@
 .page {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
   background-color: lightgray;
   padding: 5rem 0;
+}
+
+.menu {
+  display: flex;
 }
 
 .canvas {
@@ -26,14 +29,14 @@
 .options {
 
   &__hidden {
-    width: 32rem;
-    height: 2.5rem;
+    position: absolute;
+    height: 0;
     overflow: hidden;
     transition: height 250ms;
   }
 
   &__visible {
-    width: 32rem;
+    position: absolute;
     height: 10rem;
     transition: height 250ms;
   }
@@ -86,14 +89,14 @@
 .palette {
 
   &__hidden {
-    width: 32rem;
-    height: 2.5rem;
+    position: absolute;
+    height: 0;
     overflow: hidden;
     transition: height 250ms;
   }
 
   &__visible {
-    width: 32rem;
+    position: absolute;
     height: 10rem;
     transition: height 250ms;
   }
@@ -135,14 +138,14 @@
 .tools {
 
   &__hidden {
-    width: 32rem;
-    height: 2.5rem;
+    position: absolute;
+    height: 0;
     overflow: hidden;
     transition: height 250ms;
   }
 
   &__visible {
-    width: 32rem;
+    position: absolute;
     height: 10rem;
     transition: height 250ms;
   }
@@ -175,14 +178,14 @@
 .brushes {
 
   &__hidden {
-    width: 32rem;
-    height: 2.5rem;
+    position: absolute;
+    height: 0;
     overflow: hidden;
     transition: height 250ms;
   }
 
   &__visible {
-    width: 32rem;
+    position: absolute;
     height: 10rem;
     transition: height 250ms;
   }
