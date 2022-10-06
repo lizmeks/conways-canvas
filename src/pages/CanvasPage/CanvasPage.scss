@@ -8,6 +8,7 @@
 
 .menu {
   display: flex;
+  margin-bottom: .25rem;
 }
 
 .canvas {
@@ -26,19 +27,22 @@
 }
 
 
-.options {
+.controls {
+  margin-right: .25rem;
 
   &__hidden {
     position: absolute;
     height: 0;
     overflow: hidden;
-    transition: height 250ms;
   }
 
   &__visible {
     position: absolute;
-    height: 10rem;
-    transition: height 250ms;
+    display: flex;
+    background-color: grey;
+    box-shadow: inset 0px 0px 10px 4px #D3D3D3;
+    border-radius: 8px;
+    padding: 1rem;
   }
 
   &__title {
@@ -63,6 +67,10 @@
 
   &__button-container {
     display: flex;
+    background-color: grey;
+    box-shadow: inset 0px 0px 10px 4px #D3D3D3;
+    border-radius: 8px;
+    padding: 1rem;
   }
 
   &__button {
@@ -72,7 +80,7 @@
     height: 4rem;
     width: 4rem;
     border-radius: 8px;
-    margin-right: 1rem;
+    margin: 0 .25rem;
     cursor: pointer;
 
     &:active {
@@ -87,29 +95,27 @@
 }
 
 .palette {
+  margin-right: .25rem;
 
   &__hidden {
     position: absolute;
     height: 0;
-    overflow: hidden;
-    transition: height 250ms;
+    overflow: hidden;;
   }
 
   &__visible {
     position: absolute;
-    height: 10rem;
-    transition: height 250ms;
+    display: flex;
+    flex-wrap: wrap;
+    width: 24.5rem;
+    background-color: grey;
+    box-shadow: inset 0px 0px 10px 4px #D3D3D3;
+    border-radius: 8px;
+    padding: 1rem;
   }
 
   &__title {
     font-size: 2rem;
-  }
-
-  &__container {
-    display: flex;
-    flex-wrap: wrap;
-    width: calc(2.25rem * 10);
-    margin: 1rem 1rem 1rem 0;
   }
 
   &__button {
@@ -136,26 +142,25 @@
 }
 
 .tools {
+  margin-right: .25rem;
 
   &__hidden {
     position: absolute;
     height: 0;
     overflow: hidden;
-    transition: height 250ms;
   }
 
   &__visible {
     position: absolute;
-    height: 10rem;
-    transition: height 250ms;
+    display: flex;
+    background-color: grey;
+    box-shadow: inset 0px 0px 10px 4px #D3D3D3;
+    border-radius: 8px;
+    padding: 1rem;
   }
 
   &__title {
     font-size: 2rem;
-  }
-  
-  &__container {
-    display: flex;
   }
 
   &__item {
@@ -176,35 +181,29 @@
 }
 
 .brushes {
+  position: relative;
+  margin-right: .25rem;
 
   &__hidden {
     position: absolute;
     height: 0;
     overflow: hidden;
-    transition: height 250ms;
   }
 
   &__visible {
     position: absolute;
-    height: 10rem;
-    transition: height 250ms;
-  }
-
-  &__title {
-    font-size: 2rem;
-  }
-
-  &__list {
     display: flex;
     flex-wrap: wrap;
-    height: 8rem;
-    width: 20rem;
     background-color: grey;
     box-shadow: inset 0px 0px 10px 4px #D3D3D3;
     border-radius: 8px;
     padding: 1rem;
     margin-bottom: 1rem;
     overflow: auto;
+  }
+
+  &__title {
+    font-size: 2rem;
   }
 
   &__list-item {
