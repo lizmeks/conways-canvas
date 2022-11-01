@@ -89,7 +89,8 @@ class CanvasPage extends Component {
   playHandler = () => {
     if (!this.state.playing) {
       this.setState({
-        playing: true
+        playing: true,
+        visibleMenu: ''
       })
       this.playInterval = setInterval(this.stepHandler, 100);
     }
