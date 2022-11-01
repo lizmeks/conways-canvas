@@ -1,33 +1,54 @@
 .page {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
   background-color: lightgray;
   padding: 5rem 0;
+}
+
+.menu {
+  display: flex;
+  margin-bottom: .25rem;
 }
 
 .canvas {
   display: flex;
   flex-wrap: wrap;
-  width: 1200px;
-  height: 1200px;
-  background-color: darkgray;
-  overflow: auto;
+  justify-content: center;
+  overflow: hidden;
   margin-bottom: 2rem;
   
   &__cell {
-    width: 1%;
-    height: 1%;
+    width: 12px;
+    height: 12px;
     border-right: 1px solid rgba(128, 128, 128, .5);
     border-bottom: 1px solid rgba(128, 128, 128, .5);
   }
 }
 
 
-.menu {
-  margin-left: 1rem;
-  width: 32rem;
+.controls {
+  margin-right: .25rem;
+
+  &__hidden {
+    position: absolute;
+    height: 0;
+    overflow: hidden;
+  }
+
+  &__visible {
+    position: absolute;
+    display: flex;
+    background-color: grey;
+    box-shadow: inset 0px 0px 10px 4px #D3D3D3;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  &__title {
+    font-size: 2rem;
+    padding: 0 .5rem;
+  }
 
   &__preset-select {
     height: 2rem;
@@ -44,14 +65,13 @@
     background-color: grey;
     color: white;
   }
-  
-  &__save-container {
-    display: flex;
-    margin-bottom: 1rem;
-  }
 
   &__button-container {
     display: flex;
+    background-color: grey;
+    box-shadow: inset 0px 0px 10px 4px #D3D3D3;
+    border-radius: 8px;
+    padding: 1rem;
   }
 
   &__button {
@@ -61,7 +81,7 @@
     height: 4rem;
     width: 4rem;
     border-radius: 8px;
-    margin-right: 1rem;
+    margin: 0 .25rem;
     cursor: pointer;
 
     &:active {
@@ -76,10 +96,29 @@
 }
 
 .palette {
-  display: flex;
-  flex-wrap: wrap;
-  width: calc(2.25rem * 10);
-  margin: 1rem 1rem 1rem 0;
+  margin-right: .25rem;
+
+  &__hidden {
+    position: absolute;
+    height: 0;
+    overflow: hidden;;
+  }
+
+  &__visible {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    width: 24.5rem;
+    background-color: grey;
+    box-shadow: inset 0px 0px 10px 4px #D3D3D3;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  &__title {
+    font-size: 2rem;
+    padding: 0 .5rem;
+  }
 
   &__button {
     display: flex;
@@ -105,7 +144,27 @@
 }
 
 .tools {
-  display: flex;
+  margin-right: .25rem;
+
+  &__hidden {
+    position: absolute;
+    height: 0;
+    overflow: hidden;
+  }
+
+  &__visible {
+    position: absolute;
+    display: flex;
+    background-color: grey;
+    box-shadow: inset 0px 0px 10px 4px #D3D3D3;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  &__title {
+    font-size: 2rem;
+    padding: 0 .5rem;
+  }
 
   &__item {
     display: flex;
@@ -125,24 +184,31 @@
 }
 
 .brushes {
-  margin: 1rem 1rem 1rem 0;
+  position: relative;
+  margin-right: .25rem;
 
-  &__text {
-    font-size: 1.25rem;
-    margin-bottom: .25rem;
+  &__hidden {
+    position: absolute;
+    height: 0;
+    overflow: hidden;
   }
 
-  &__list {
+  &__visible {
+    position: absolute;
     display: flex;
     flex-wrap: wrap;
-    height: 8rem;
-    width: 100%;
+    right: 0;
     background-color: grey;
     box-shadow: inset 0px 0px 10px 4px #D3D3D3;
     border-radius: 8px;
     padding: 1rem;
     margin-bottom: 1rem;
     overflow: auto;
+  }
+
+  &__title {
+    font-size: 2rem;
+    padding: 0 .5rem;
   }
 
   &__list-item {
